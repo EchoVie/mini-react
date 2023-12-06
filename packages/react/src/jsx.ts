@@ -1,12 +1,7 @@
 import { ElementType, Ref, Key, Props } from 'shared/ReactTypes';
 import { REACT_ELEMENT_TYPE } from 'shared/ReactSymbols';
 
-const ReactElement = (
-  type: ElementType,
-  key: Key,
-  ref: Ref,
-  props: Props
-) => {
+const ReactElement = (type: ElementType, key: Key, ref: Ref, props: Props) => {
   return {
     $$typeof: REACT_ELEMENT_TYPE,
     type,
@@ -79,4 +74,15 @@ export const jsxDEV = (type: ElementType, config: any) => {
   }
 
   return ReactElement(type, key, ref, props);
+};
+
+export const isValidElement = (element: ElementType) => {
+  if (
+    typeof element === 'object' &&
+    element !== null &&
+    element.$$typeof === REACT_ELEMENT_TYPE
+  ) {
+    return true;
+  }
+  return false;
 };
