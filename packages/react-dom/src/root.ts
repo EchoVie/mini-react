@@ -1,4 +1,6 @@
 import { Container } from './hostConfig';
+import { ReactElementType } from 'shared/ReactTypes';
+
 import {
   createContainer,
   updateContainer
@@ -8,7 +10,7 @@ export function createRoot(container: Container) {
   const root = createContainer(container);
 
   return {
-    render(element: Element) {
+    render(element: ReactElementType) {
       return updateContainer(element, root);
     }
   };

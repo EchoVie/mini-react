@@ -13,7 +13,11 @@ export interface ReactElementType {
   __mark: string;
 }
 
-export type Action<State> = State | ((prevState: State) => State);
+export type ReactEmpty = null | void | boolean;
+
+export type ReactFragment = ReactEmpty | Iterable<ReactElementType>;
+
+export type Action<State> = State | ((prevState?: State) => State);
 
 export type ReactContext<T> = {
   $$typeof: symbol | number;

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "demo": "vite serve demos/test-fn --config scripts/vite/vite.config.js",
+    "demo": "vite serve demos/test-fn --config scripts/vite/vite.config.js --force",
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint --ext .js,.ts",
     "prepare": "husky install",

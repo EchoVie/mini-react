@@ -3,6 +3,7 @@ import ts from 'rollup-plugin-typescript2';
 import cjs from '@rollup/plugin-commonjs';
 import clear from 'rollup-plugin-clear';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import replace from '@rollup/plugin-replace';
 import { resolvePkgPath, getPackageJSON } from './utils';
 
 const { name, module } = getPackageJSON('react');
@@ -35,6 +36,12 @@ export default {
     }),
     clear({
       targets: ['dist']
+    }),
+    replace({
+      alias: {
+        __DEV__: true,
+        preventAssignment: true
+      },
     })
   ]
 };

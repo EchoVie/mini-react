@@ -1,7 +1,13 @@
 import { Container } from 'hostConfig';
 import { FiberNode, FiberRootNode } from './fiber';
 import { HostRoot } from './workTags';
-import { createUpdateQueue, createUpdate, enqueueUpdate, UpdateQueue } from './updateQueues';
+import { scheduleUpdateOnFiber } from './workLoop';
+import {
+  createUpdateQueue,
+  createUpdate,
+  enqueueUpdate,
+  UpdateQueue
+} from './updateQueues';
 import { ReactElementType } from 'shared/ReactTypes';
 import { requestUpdateLane } from './fiberLanes';
 import {
@@ -28,13 +34,14 @@ export const updateContainer = (
     // { action: element, lane: 'SyncLane', next: null, hasEagerState: false, eagerState: null }
     const update = createUpdate(element, lane);
 
-    // 1. hostRootFiber.updateQueue.shared.pengding 后增加新update 2. hostRootFiber.lanes增加'SyncLane'
+    // 1. hostRootFiber.updateQueue.shared.pending 后增加新update
+    // 2. hostRootFiber.lanes增加'SyncLane'
     enqueueUpdate(
       hostRootFiber.updateQueue as UpdateQueue<ReactElementType | null>,
       update,
       hostRootFiber,
       lane
     );
-    // scheduleUpdateOnFiber(hostRootFiber, lane); // 调度更新
+    scheduleUpdateOnFiber(hostRootFiber, lane); // 调度更新
   });
 };
